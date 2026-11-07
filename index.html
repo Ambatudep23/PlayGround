@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#182a38" />
+  <meta name="description" content="A gentle anime summer-life story about friendship, festival lights, and finding your place." />
+  <title>Summer in Aoshima — a little summer story</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <header class="topbar">
+      <button class="brand" id="brandHome" aria-label="Go to the town square">
+        <span class="brand-mark">✦</span><span class="brand-words"><b>AOshima</b><small>SUMMER, IN YOUR OWN TIME</small></span>
+      </button>
+      <div class="season-tag"><span class="sun-icon">☼</span><span>THE LONGEST SUMMER</span></div>
+      <div class="top-right">
+        <div class="day-chip"><span class="calendar-icon">▦</span><span id="dayLabel">DAY 01 · MON</span></div>
+        <button class="icon-button" id="soundButton" aria-label="Toggle ambient sound" title="Ambient sound">♫</button>
+        <button class="icon-button" id="saveButton" aria-label="Save game" title="Save game">⌑</button>
+        <button class="avatar-mini" id="profileButton" aria-label="Open your journal">Y</button>
+      </div>
+    </header>
+
+    <main class="game-layout">
+      <aside class="left-rail">
+        <div class="rail-heading"><span>YOUR SUMMER</span><span class="tiny-spark">✧</span></div>
+        <div class="player-card">
+          <div class="player-avatar"><span>Y</span><i>✦</i></div>
+          <div><b>Yuki Tanaka</b><small>Back in Aoshima · 20</small></div>
+          <button id="editName" class="edit-name" title="Change your name">✎</button>
+        </div>
+        <div class="energy-wrap">
+          <div class="energy-heading"><span>DAYLIGHT</span><b id="energyText">3 / 3</b></div>
+          <div class="energy-track" id="energyTrack" aria-label="Daylight remaining"></div>
+          <small class="energy-note">One little plan at a time.</small>
+        </div>
+        <div class="rail-heading location-heading"><span>WANDER TO</span><span class="pin-icon">⌖</span></div>
+        <nav class="location-list" id="locationList" aria-label="Locations"></nav>
+        <div class="festival-card">
+          <div class="festival-sun">☼</div><div><b>THE SUMMER FESTIVAL</b><small>First Saturday · Day 06</small></div>
+          <div class="festival-progress"><span id="festivalProgress"></span></div><small class="festival-caption" id="festivalCaption">Help the town get ready.</small>
+        </div>
+        <button class="journal-link" id="journalButton"><span>▤</span> Open your journal <kbd>J</kbd></button>
+      </aside>
+
+      <section class="stage-column">
+        <div class="scene-card" id="sceneCard">
+          <div class="scene-art" id="sceneArt" aria-hidden="true"></div>
+          <div class="scene-vignette"></div>
+          <div class="scene-topline"><div class="location-pill"><span class="location-dot"></span><span id="locationTitle">TOWN SQUARE</span></div><div class="weather-pill">☀ &nbsp; CLEAR SKIES</div></div>
+          <div class="scene-caption"><span id="sceneTime">LATE MORNING</span><span class="caption-divider">/</span><span id="sceneMood">A breeze from the sea</span></div>
+          <div class="scene-people" id="scenePeople"></div>
+          <div class="scene-hint" id="sceneHint">A warm day is waiting for you.</div>
+          <div class="dialogue-card" id="dialogueCard">
+            <div class="dialogue-top"><div class="speaker-icon" id="speakerIcon">✦</div><div class="speaker-meta"><b id="speakerName">A NEW CHAPTER</b><small id="speakerRole">AOshima · early summer</small></div><div class="dialogue-mark">❝</div></div>
+            <p class="dialogue-text" id="dialogueText"></p>
+            <div class="choice-list" id="choiceList"></div>
+            <div class="dialogue-footer"><span id="dialogueFootnote">Your choices shape this summer.</span><button class="continue-button" id="continueButton">CONTINUE <span>→</span></button></div>
+          </div>
+          <button class="scene-action" id="sceneAction" aria-label="Interact with this location"><span>✦</span><b>LOOK AROUND</b></button>
+        </div>
+        <div class="bottom-bar"><div class="quote"><span>✧</span><i id="dailyQuote">“The sea keeps all the little things we almost said.”</i></div><div class="controls-legend"><kbd>J</kbd> JOURNAL <span>·</span> <kbd>1–3</kbd> CHOOSE <span>·</span> <kbd>ESC</kbd> CLOSE</div></div>
+      </section>
+
+      <aside class="right-rail">
+        <div class="right-heading"><span>PEOPLE, &amp; LITTLE THINGS</span><button id="peopleHelp" class="help-dot" title="Everyone in this story is an adult">?</button></div>
+        <div class="people-list" id="peopleList"></div>
+        <div class="rail-divider"></div>
+        <div class="right-heading town-heading"><span>TOWN NOTES</span><span class="note-icon">✧</span></div>
+        <div class="town-note" id="townNote"><div class="note-doodle">⌁</div><p>Lanterns are going up along the harbor. The festival committee could use a hand.</p><small>THE AOshima BULLETIN</small></div>
+        <div class="memory-card"><div class="memory-icon">✺</div><div><b>Little memories</b><small id="memoryCount">0 moments collected</small></div><button id="memoriesButton" aria-label="View memories">→</button></div>
+        <div class="save-status" id="saveStatus"><span class="status-dot"></span> YOUR SUMMER IS SAVED</div>
+      </aside>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <div class="modal-backdrop" id="modalBackdrop" hidden>
+      <section class="modal-card" id="modalCard" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+        <div class="modal-eyebrow" id="modalEyebrow">A LITTLE NOTE</div><h2 id="modalTitle">Your journal</h2><div class="modal-content" id="modalContent"></div>
+      </section>
+    </div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
